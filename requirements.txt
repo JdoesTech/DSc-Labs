@@ -1,3 +1,6 @@
 matplotlib
 pandas
 plotly.express
+category_encoders
+sklearn
+glob
