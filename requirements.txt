@@ -1,6 +1,8 @@
 matplotlib
 pandas
-plotly.express
+plotly
 category_encoders
 sklearn
 glob
+pymongo
+statsmodels
