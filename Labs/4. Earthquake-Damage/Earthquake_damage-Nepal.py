@@ -75,7 +75,7 @@ ax.set_title("Kavrepalanchok, Plinth Area vs Building Damage")
 
 #Plot the relationship between roof type and severe damage using a bar plot
 roof_pivot = pd.pivot_table(df, index="roof_type", values="severe_damage", aggfunc=np.mean).sort_values(by="severe_damage")
-roof_pivot
+print(roof_pivot)
 
 #Creating X and y values for modeling
 coll=[col for col in df.columns if col != "severe_damage"]
@@ -122,12 +122,12 @@ for d in depth_hyperparams:
     validation_acc.append(model_dt.score(X_val, y_val))
     
     
-# Store validation accuracy scores as a Series 
+# Storing validation accuracy scores as a Series 
 submission = pd.Series(validation_acc, index=depth_hyperparams)
-submission
+print(submission)
 
 # Plot of the training accuracy on the axes object
-fig, ax = plt.subplots() t
+fig, ax = plt.subplots() 
 ax.plot(depth_hyperparams, training_acc, label="training")
 #  Plot of the validation accuracy on the same axes object
 ax.plot(depth_hyperparams, validation_acc, label="validation") 
@@ -148,13 +148,13 @@ X_test= X_test.loc[:, X_train.columns]
 y_test_pred = final_model_dt.predict(X_test)
 y_test_pred[:5]
 
-#Create a series of the importance of individual features in prediction
+#A series of the importance of individual features in prediction
 features=X_test.columns
 importance= final_model_dt.named_steps["decisiontreeclassifier"].feature_importances_
 feat_imp= pd.Series(importance, index=features).sort_values(ascending=True)
 feat_imp.head()
 
-#Plot the feature importance
+#Plot of the feature importance
 fig, ax = plt.subplots() 
 feat_imp.plot(kind="barh", ax=ax)
 ax.set_xlabel("Gini Importance")
